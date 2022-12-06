@@ -2,15 +2,14 @@ package ru.yandex.sashifazya;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.After;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.yandex.sashifazya.pageobject.mainPageScooter;
 import ru.yandex.sashifazya.pageobject.orderPageScooter;
 
 @RunWith(Parameterized.class)
-public class orderFlowPositiveTests {
+public class orderFlowPositiveTests extends BaseTest{
 
     private final String clientName;
     private final String clientSurname;
@@ -45,8 +44,8 @@ public class orderFlowPositiveTests {
     public void orderUpperButtonTest(){
     //    System.setProperty("webdriver.chrome.driver", "/Users/sashun/Documents/WebDriver/bin/chromedriver");
     //    WebDriver driver = new ChromeDriver();
-        System.setProperty("webdriver.gecko.driver", "/Users/sashun/Documents/WebDriver/bin/geckodriver");
-        WebDriver driver = new FirefoxDriver();
+    //    System.setProperty("webdriver.gecko.driver", "/Users/sashun/Documents/WebDriver/bin/geckodriver");
+    //    WebDriver driver = new FirefoxDriver();
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
@@ -66,16 +65,14 @@ public class orderFlowPositiveTests {
         Assert.assertTrue(objOrderPage.checkOrderSuccessPopupIsDisplayed());
         objOrderPage.clickCheckOrderStatusButton();
         objOrderPage.checkOrderTrackInfoIsDisplayed();
-
-        driver.quit();
     }
 
     @Test
     public void orderLowerButtonTest(){
-       // System.setProperty("webdriver.chrome.driver", "/Users/sashun/Documents/WebDriver/bin/chromedriver");
-       // WebDriver driver = new ChromeDriver();
-        System.setProperty("webdriver.gecko.driver", "/Users/sashun/Documents/WebDriver/bin/geckodriver");
-        WebDriver driver = new FirefoxDriver();
+      //  System.setProperty("webdriver.chrome.driver", "/Users/sashun/Documents/WebDriver/bin/chromedriver");
+      //  WebDriver driver = new ChromeDriver();
+        //System.setProperty("webdriver.gecko.driver", "/Users/sashun/Documents/WebDriver/bin/geckodriver");
+       // WebDriver driver = new FirefoxDriver();
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
@@ -95,14 +92,10 @@ public class orderFlowPositiveTests {
         Assert.assertTrue(objOrderPage.checkOrderSuccessPopupIsDisplayed());
         objOrderPage.clickCheckOrderStatusButton();
         objOrderPage.checkOrderTrackInfoIsDisplayed();
-
-        driver.quit();
-
-
     }
-   // @After
-   // public void tearDown(){
-   //     driver.quit();
-   // }
+    @After
+    public void tearDown(){
+        driver.quit();
+    }
 
 }

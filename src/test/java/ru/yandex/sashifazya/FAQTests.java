@@ -5,13 +5,10 @@ import org.junit.Test;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.AfterParam;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.sashifazya.pageobject.mainPageScooter;
 
 @RunWith(Parameterized.class)
-public class FAQTests {
+public class FAQTests extends BaseTest {
     private final int questionNumber;
     private final String expectedAnswer;
 
@@ -36,8 +33,8 @@ public class FAQTests {
 
     @Test
     public void checkFAQText(){
-        System.setProperty("webdriver.chrome.driver", "/Users/sashun/Documents/WebDriver/bin/chromedriver");
-        WebDriver driver = new ChromeDriver();
+      //  System.setProperty("webdriver.chrome.driver", "/Users/sashun/Documents/WebDriver/bin/chromedriver");
+      //  WebDriver driver = new ChromeDriver();
         // переход на страницу тестового приложения
         driver.get("https://qa-scooter.praktikum-services.ru/");
 
@@ -49,16 +46,11 @@ public class FAQTests {
         objMainPage.clickQuestion(questionNumber);
         String actualAnswer = objMainPage.getQuestionAnswerText(questionNumber);
         Assert.assertEquals(actualAnswer, expectedAnswer);
-
-        driver.quit(); //приходится закрывать тут - after не работает.
-        // Вынести объявление драйвера за пределы теста на уровень класса не могу - тогда не проходит System.setProperty();
-        // Без этого не работает, хотя PATH прописала echo $PATH
-        ///Users/sashun/Documents/WebDriver/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
     }
 
-  //  @After //НЕ РАБОТАЕТ!
-  //  public void teardown() {
-  //      // Закрыть браузер
-  //      driver.quit();
-  //  }
+    @After
+    public void teardown() {
+        // Закрыть браузер
+        driver.quit();
+    }
 }
